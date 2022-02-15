@@ -5,7 +5,7 @@ class Board
     @size = size
   end
 
-  def place_parallel
+  def populate
     length = @size * @size/2
     alpha = ("a".."z").to_a
     parallel = []
@@ -23,7 +23,11 @@ class Board
 
         end
     end
-    p @grid
+  end
+
+  def render
+    row = []
+    @grid.each {|row| puts row.join(" ")}
 
   end
 
@@ -31,4 +35,4 @@ class Board
 end
 
 b = Board.new
-b.place_parallel
+b.render
