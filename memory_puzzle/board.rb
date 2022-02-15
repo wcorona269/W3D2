@@ -23,15 +23,14 @@ class Board
           idx1 = rand(0...@size)
           idx2 = rand(0...@size)
         end
-        @grid[idx1][idx2] = Card.new(parallel[i])
-
+          @grid[idx1][idx2] = Card.new(parallel[i])
+          
         end
     end
   end
 
   def render
      @grid.each {|row| puts row.join(" ")}
-
   end
 
   def [](pos)
@@ -46,7 +45,6 @@ class Board
 
   def reveal(pos)
     p self[pos]
-    
 
   end
 
@@ -54,4 +52,4 @@ class Board
 end
 
 b = Board.new
-p b.grid
+p b.populate

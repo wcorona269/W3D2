@@ -1,21 +1,32 @@
 
 
 class Card
+  attr_accessor :val, :showing
 
   def initialize(val)
     @val = val
-    @card_face = false
+    @showing = false
 
   end
 
-  def face_up?
-    # if @card_face == false
-    #     @card_face = true
+  def hide
+    @showing = false
   end
 
+  def reveal
+    @showing = true
+  end
 
+  def to_s
+    @val
+  end
+
+  
 
   
 end
+
+card = Card.new("A")
+
 
 
