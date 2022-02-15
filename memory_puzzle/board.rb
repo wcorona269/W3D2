@@ -1,4 +1,8 @@
+require_relative "card"
+
 class Board
+
+  attr_reader :grid
 
   def initialize(size=4)
     @grid = Array.new(size){Array.new(size, "_")}
@@ -19,15 +23,30 @@ class Board
           idx1 = rand(0...@size)
           idx2 = rand(0...@size)
         end
-        @grid[idx1][idx2] = parallel[i]
+        @grid[idx1][idx2] = Card.new(parallel[i])
 
         end
     end
   end
 
   def render
-    row = []
-    @grid.each {|row| puts row.join(" ")}
+     @grid.each {|row| puts row.join(" ")}
+
+  end
+
+  def [](pos)
+    row, col = pos
+    @grid[row][col]
+  end
+
+  def []=(pos, val)
+    row, col = pos
+    @grid[row][col] = val
+  end
+
+  def reveal(pos)
+    p self[pos]
+    
 
   end
 
@@ -35,4 +54,4 @@ class Board
 end
 
 b = Board.new
-b.render
+p b.grid

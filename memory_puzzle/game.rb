@@ -1,9 +1,10 @@
 class Game
 
+  @board.render
 
 
 pos = gets.chomp
-@card.get_user_input(pos)
+@board.reveal(pos)
 
 
 
