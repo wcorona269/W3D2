@@ -11,6 +11,7 @@ class Card
 
   def hide
     @showing = false
+    
   end
 
   def reveal
@@ -20,6 +21,12 @@ class Card
   def to_s
     @val
   end
+
+  def ==(guess)
+    guess.val == @val
+  end
+  
+  
 
   
 

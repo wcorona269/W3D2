@@ -1,3 +1,4 @@
+# require "byebug"
 require_relative "card"
 
 class Board
@@ -5,7 +6,7 @@ class Board
   attr_reader :grid
 
   def initialize(size=4)
-    @grid = Array.new(size){Array.new(size, "_")}
+    @grid = Array.new(size){Array.new(size)}
     @size = size
   end
 
@@ -13,18 +14,22 @@ class Board
     length = @size * @size/2
     alpha = ("a".."z").to_a
     parallel = []
-    length.times { parallel << alpha.sample.upcase }
-  
+    length.times { |i| parallel << alpha[i].upcase }
+    p parallel
     parallel.length.times do |i|
       2.times do 
-      idx1 = 0 
-      idx2 = 0
-        while @grid[idx1][idx2] != "_"
+       
+        # debugger
+        idx1 = 0 
+        idx2 = 0
+        while !@grid[idx1][idx2].nil?
+          # debugger
           idx1 = rand(0...@size)
           idx2 = rand(0...@size)
         end
+        # debugger
           @grid[idx1][idx2] = Card.new(parallel[i])
-          
+   
         end
     end
   end
@@ -45,11 +50,26 @@ class Board
 
   def reveal(pos)
     p self[pos]
-
   end
 
+  def won?
+    @grid.flatten.none?("_")
+  end
 
+  #check if showing
+  #if already showing, do nothing
+  #if not showing, return value of card it revealed
+  def reveal(pos)
+   self[pos].val
+    if self[pos].showing
+      self[pos].val
+    end
+  end
 end
 
 b = Board.new
-p b.populate
+
+b.populate
+
+
+p b.reveal([1,2])
